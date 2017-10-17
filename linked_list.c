@@ -2,16 +2,10 @@
 #include <stdlib.h>
 #include "linked_list.h"
 
-//Linked List
-
-struct song_node { char name[256]; char artist[256]; struct song_node *next; };
-
-void print_list(struct song_node * list){
-  int count = 0;
-  while (list != NULL){
-    printf("Node %d: %d, %d \n", count, list->something, list->another);
-    list= list->next;
-    count++;
+void print_list(struct song_node *list) {
+  while (list != NULL) {
+    printf("%s - %s \n", list->artist, list->name);
+    list = list->next;
   }
 }
 
