@@ -1,15 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "linked_list.h"
 
 //Linked List
 
-struct node{
-  int something;
-  int another;
-  struct node *next; // This is a pointer to the next node
-};
+struct song_node { char name[256]; char artist[256]; struct song_node *next; };
 
-void print_list(struct node * list){
+void print_list(struct song_node * list){
   int count = 0;
   while (list != NULL){
     printf("Node %d: %d, %d \n", count, list->something, list->another);
@@ -21,19 +18,19 @@ void print_list(struct node * list){
 
 // This function could basically be used to insert front but I made it after
 // I made the insert_front so thats not important
-struct node *make_node(int val1, int val2, struct node * another_one){
-  struct node * new_node = (struct node*)malloc(sizeof(struct node));
-  new_node->something = val1;
-  new_node->another = val2;
-  new_node->next = another_one;
-  return new_node;
+struct song_node *make_song_node(int val1, int val2, struct song_node * another_one){
+  struct song_node * new_song_node = (struct song_node*)malloc(sizeof(struct song_node));
+  new_song_node->something = val1;
+  new_song_node->another = val2;
+  new_song_node->next = another_one;
+  return new_song_node;
 
 }
 
-struct node * insert_front(struct node * front, int val1, int val2){
-  //Creates a new front node 
-  
-  struct node * new_front = (struct node*)malloc(sizeof(struct node));
+struct song_node * insert_front(struct song_node * front, int val1, int val2){
+  //Creates a new front song_node
+
+  struct song_node * new_front = (struct song_node*)malloc(sizeof(struct song_node));
   if(new_front == NULL){
         printf("Error\n");
         exit(0);
@@ -45,8 +42,8 @@ struct node * insert_front(struct node * front, int val1, int val2){
   return new_front;
 }
 
-struct node * free_list(struct node * front){
-  struct node *temp;
+struct song_node * free_list(struct song_node * front){
+  struct song_node *temp;
   while(front != NULL){
     temp = front->next;
     free(front);
