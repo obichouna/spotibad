@@ -13,3 +13,12 @@ int main(){
   printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \n");
 
  }
+
+
+void add_song_node(struct song_node track){
+  char first_letter = track.artist[0];
+  first_letter + 32;
+  int i = first_letter - 97;
+  
+
+}
