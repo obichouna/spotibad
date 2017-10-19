@@ -11,16 +11,16 @@ void print_list(struct song_node *list) {
 }
 
 
-struct song_node *make_song_node(char[] track, char[] band){
+struct song_node *make_song_node(char track[], char band[]){
   struct song_node * new_song_node = (struct song_node*)malloc(sizeof(struct song_node));
-  new_song_node->name = track;
-  new_song_node->band = artist;
+  strcpy(new_song_node->name, track);
+  strcpy(new_song_node->artist, band);;
   //new_song_node->next = the_next;
   return new_song_node;
 
 }
 
-struct song_node * insert_front(struct song_node * front, char[] name, char[] artist){
+struct song_node * insert_front(struct song_node * front, char name[], char artist[]){
   //Creates a new front song_node
     // (struct song_node*)malloc(sizeof(struct song_node));
     //if(new_front == NULL){
@@ -31,21 +31,21 @@ struct song_node * insert_front(struct song_node * front, char[] name, char[] ar
     // new_front->another = val2;
     // new_front->next = front;
   // printf("Success! \n");
-  struct song_node * new_front = make_song_node(name, artist, front);
+  struct song_node * new_front = make_song_node(name, artist);
   new_front->next = front;
   return new_front;
 }
 
-struct song_node * insert_order(char[] track, char[] band){
+struct song_node * insert_order(char track[], char band[]){
   struct song_node * new_node = make_song_node(track, band);
-  int i = new_node->band[0];
+  int i = new_node->artist[0];
   struct song_node * songs = &song_array[i];
   struct song_node * prev_node = NULL;
   while (songs){
     struct song_node * song_next = songs->next;
-    bool tmp = strcmp(songs->artist, band);
+    int tmp = strcmp(songs->artist, band);
     if (!tmp){
-      tmp = strcmp(songs->song, track); // Case where artist is the same
+      tmp = strcmp(songs->name, track); // Case where artist is the same
       if (!tmp){
 	printf("Song already exists!");
 	return songs;
