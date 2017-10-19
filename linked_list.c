@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "linked_list.h"
 
 void print_list(struct song_node *list) {
@@ -10,31 +11,67 @@ void print_list(struct song_node *list) {
 }
 
 
-// This function could basically be used to insert front but I made it after
-// I made the insert_front so thats not important
-struct song_node *make_song_node(int val1, int val2, struct song_node * another_one){
+struct song_node *make_song_node(char[] track, char[] band){
   struct song_node * new_song_node = (struct song_node*)malloc(sizeof(struct song_node));
-  new_song_node->something = val1;
-  new_song_node->another = val2;
-  new_song_node->next = another_one;
+  new_song_node->name = track;
+  new_song_node->band = artist;
+  //new_song_node->next = the_next;
   return new_song_node;
 
 }
 
-struct song_node * insert_front(struct song_node * front, int val1, int val2){
+struct song_node * insert_front(struct song_node * front, char[] name, char[] artist){
   //Creates a new front song_node
-
-  struct song_node * new_front = (struct song_node*)malloc(sizeof(struct song_node));
-  if(new_front == NULL){
-        printf("Error\n");
-        exit(0);
-    }
-  new_front->something = val1;
-  new_front->another = val2;
-  new_front->next = front;
+    // (struct song_node*)malloc(sizeof(struct song_node));
+    //if(new_front == NULL){
+    //     printf("Error\n");
+    //    exit(0);
+  //  }
+  // new_front->something = val1;
+    // new_front->another = val2;
+    // new_front->next = front;
   // printf("Success! \n");
+  struct song_node * new_front = make_song_node(name, artist, front);
+  new_front->next = front;
   return new_front;
 }
+
+struct song_node * insert_order(char[] track, char[] band){
+  struct song_node * new_node = make_song_node(track, band);
+  int i = new_node->band[0];
+  struct song_node * songs = &song_array[i];
+  struct song_node * prev_node = NULL;
+  while (songs){
+    struct song_node * song_next = songs->next;
+    bool tmp = strcmp(songs->artist, band);
+    if (!tmp){
+      tmp = strcmp(songs->song, track); // Case where artist is the same
+      if (!tmp){
+	printf("Song already exists!");
+	return songs;
+      }else{
+	if(tmp < 0){
+	  prev_node->next = new_node;
+	  new_node->next = song_next;
+	}else{
+	  prev_node = songs;
+	  songs = song_next;
+	}
+      }
+    }else{
+      if (tmp < 0){
+	prev_node->next = new_node;
+	new_node->next = song_next;
+      }else{
+	prev_node = songs;
+	songs = song_next;
+      }
+    }
+  }
+  return new_node;
+}
+
+
 
 struct song_node * free_list(struct song_node * front){
   struct song_node *temp;
