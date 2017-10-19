@@ -17,8 +17,21 @@ int main(){
 
 void add_song_node(struct song_node track){
   char first_letter = track.artist[0];
-  first_letter + 32;
+  first_letter = first_letter + 32;
   int i = first_letter - 97;
   
+  
+}
+
+struct song_node * song_search(char[] song, char[] artist){
+  int i = artist[0];
+  
+
+
+
+}
+
+struct song_node * artist_search (char[] artist_name){
+  int i = artist[0];
 
 }
