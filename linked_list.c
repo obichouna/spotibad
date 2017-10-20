@@ -44,16 +44,16 @@ struct song_node insert_front(struct song_node *front, struct song_node new_fron
  * @param head: the beginning of the list
  * @return: the head, whether or not it was changed
  */
-struct song_node insert_order(char song[], char artist[], struct song_node head){
+struct song_node * insert_order(char song[], char artist[], struct song_node* head){
   struct song_node *new_node = make_song_node(song, artist);
-  struct song_node *current = &head;
+  struct song_node *current = head;
   struct song_node *prev = NULL;
 
   int val;
   while (1) {
     if (! current) {
       prev->next = new_node;
-      return head;
+      return new_node;
     }
 
     val = strcmp(current->artist, new_node->artist);
@@ -62,7 +62,7 @@ struct song_node insert_order(char song[], char artist[], struct song_node head)
     if (val < 0) {
       prev->next = new_node;
       new_node->next = current;
-      return head;
+      return new_node;
     }
 
     // same artist
@@ -70,7 +70,7 @@ struct song_node insert_order(char song[], char artist[], struct song_node head)
       if (strcmp(current->name, new_node->name) <= 0) {
         prev->next = new_node;
         new_node->next = current;
-        return head;
+        return new_node;
       }
     }
 
