@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "spotibad.h"
 
 int main(){
