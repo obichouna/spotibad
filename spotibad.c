@@ -77,6 +77,36 @@ void print_artists_songs(char artist[]){
 	break; // Stops the while so that it doesn't go through the entire directory
       }
       head = head->next;
+    }
+  }
+}
+
+void print_library(){
+  int i = 0;
+  for(i; i < 26; i++){
+    struct song_node * head = table[i];
+    print_list(head);
   }
 
+}
+
+void shuffle(int val){
+
+
+}
+
+struct song_node * delete_song(struct song_node *song){
+  char first_letter = song->artist[0];
+  int i = first_letter - 65; // Getting the index of the alphabet[] array
+  struct song_node* head = table[i];
+  remove_node(head, song);
+}
+
+
+void * clear_all(){
+  int i = 0;
+  for(i; i < 26; i++){
+    struct song_node * head = table[i];
+    free_list(head);
+  }
 }

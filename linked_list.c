@@ -158,10 +158,12 @@ void remove_node(struct song_node *head, struct song_node *node) {
     if (! (strcmp(head->name, node->name) && strcmp(head->artist, node->artist)) ) {
       prev->next = head->next;
       free(head);
+      printf("Song: %s - %s removed \n", node->artist, node->name);
       return;
     }
 
     prev = head;
     head = head->next;
   }
+  printf("Song not found.");
 }
