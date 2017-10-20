@@ -59,3 +59,24 @@ void print_letter(char directory){
   print_list(head);
 
 }
+
+void print_artists_songs(char artist[]){
+  int i = artist[0];
+  i = i - 65; // Getting the index of the alphabet[] array
+  struct song_node* head = table[i];  
+  int tmp;
+  int val = 1;
+  while(head){
+    tmp = strcmp(head->artist, artist);
+    if (tmp == 0){
+      val = 0; // This boolean will be used to stop the while early
+      printf("%s - %s", head->artist, head->name);
+      head = head->next;
+    }else{
+      if (val == 0){
+	break; // Stops the while so that it doesn't go through the entire directory
+      }
+      head = head->next;
+  }
+
+}

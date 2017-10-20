@@ -7,5 +7,5 @@ void print_letter(char directory);
 void print_artists_songs(char artist[]);
 void print_library();
 void shuffle();
-struct song_node * delete_song(struct song_node *song);
+struct song_node * delete_song(strucelt song_node *song);
 void * clear_all();
