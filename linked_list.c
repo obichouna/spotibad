@@ -108,3 +108,20 @@ struct song_node *locate_song(char *name, char *artist, struct song_node *head) 
   return NULL;
 }
 
+/** Find node in a list based on artist.
+ * @param artist: the artist of the song
+ * @param head: the beginning of the list
+ * @return: pointer to the first node if found, NULL otherwise
+ */
+struct song_node *locate_artist(char *artist, struct song_node *head) {
+  while (head) {
+    if (! strcmp(head->artist, artist)) {
+      return head;
+    }
+
+    head = head->next;
+  }
+
+  return NULL;
+}
+
