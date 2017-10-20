@@ -36,4 +36,16 @@ struct song_node * song_search(char song[], char artist[]) {
 struct song_node * artist_search (char artist[]){
   int i = artist[0];
   i = i - 65; // Getting the index of the alphabet[] array
+  struct song_node* head = table[i];
+  int tmp;
+  while(head){
+    tmp = strcmp(head->artist, artist);
+    if (tmp == 0){
+      return head;
+    }
+    head = head->next;
+
+  }
+  printf("Artist not found");
+  return head;
 }
