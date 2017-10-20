@@ -1,4 +1,4 @@
-#include "linked_list.c"
+#include "linked_list.h"
 
 void add_song_node(struct song_node);
 struct song_node * song_search(char song[], char artist[]);
