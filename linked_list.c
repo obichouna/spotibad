@@ -89,3 +89,22 @@ void free_list(struct song_node * front){
     front = temp;
   }
 }
+
+/** Find node in a list based on artist and song name.
+ * @param name: the name of the song
+ * @param artist: the artist of the song
+ * @param head: the beginning of the list
+ * @return: pointer to the node if found, NULL otherwise
+ */
+struct song_node *locate_song(char *name, char *artist, struct song_node *head) {
+  while (head) {
+    if (! (strcmp(head->name, name) && strcmp(head->artist, artist)) ) {
+      return head;
+    }
+
+    head = head->next;
+  }
+
+  return NULL;
+}
+
