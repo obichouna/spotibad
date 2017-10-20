@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "spotibad.h"
 
 
@@ -63,7 +64,7 @@ void print_letter(char directory){
 void print_artists_songs(char artist[]){
   int i = artist[0];
   i = i - 65; // Getting the index of the alphabet[] array
-  struct song_node* head = table[i];  
+  struct song_node* head = table[i];
   int tmp;
   int val = 1;
   while(head){
@@ -74,7 +75,7 @@ void print_artists_songs(char artist[]){
       head = head->next;
     }else{
       if (val == 0){
-	break; // Stops the while so that it doesn't go through the entire directory
+        break; // Stops the while so that it doesn't go through the entire directory
       }
       head = head->next;
     }
@@ -95,13 +96,16 @@ void shuffle(int val){
 
 }
 
-struct song_node * delete_song(struct song_node *song){
+void delete_song(struct song_node *song){
   char first_letter = song->artist[0];
   int i = first_letter - 65; // Getting the index of the alphabet[] array
   struct song_node* head = table[i];
-  remove_node(head, song);
+  if (remove_node(head, song)) {
+    printf("Song not found.\n");
+  } else {
+    printf("Song removed. \n");
+  }
 }
-
 
 void * clear_all(){
   int i = 0;
