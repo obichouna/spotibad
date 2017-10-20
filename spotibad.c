@@ -49,3 +49,13 @@ struct song_node * artist_search (char artist[]){
   printf("Artist not found");
   return head;
 }
+
+void print_letter(char directory){
+  if(directory >= 97){
+    directory -= 32;  //If Directory is a lowercase letter, returns it as an uppercase
+  }
+  int i = directory - 65; // Getting the index of the alphabet[] array
+  struct song_node* head = table[i];
+  print_list(head);
+
+}
