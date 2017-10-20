@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "linked_list.h"
 
 /** Print the contents of a given list, formatted "Artist - Title" until it
@@ -123,5 +124,27 @@ struct song_node *locate_artist(char *artist, struct song_node *head) {
   }
 
   return NULL;
+}
+
+/** Find a random song.
+ * @param head: the beginning of the list
+ * @return: a random node from the list
+ */
+struct song_node *rand_song(struct song_node *head) {
+  unsigned int i = 0;
+  struct song_node *tmp = head;
+  while (tmp) {
+    i++;
+    tmp = tmp->next;
+  }
+
+  srand(time(NULL));
+  i = rand() % i;
+
+  while (i--) {
+    head = head->next;
+  }
+
+  return head;
 }
 
