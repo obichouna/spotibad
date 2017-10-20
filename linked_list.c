@@ -3,6 +3,10 @@
 #include <string.h>
 #include "linked_list.h"
 
+/** Print the contents of a given list, formatted "Artist - Title" until it
+ * reaches the end.
+ * @param list: the list to print from
+ */
 void print_list(struct song_node *list) {
   while (list != NULL) {
     printf("%s - %s \n", list->artist, list->name);
@@ -10,76 +14,78 @@ void print_list(struct song_node *list) {
   }
 }
 
-
-struct song_node *make_song_node(char track[], char band[]){
-  struct song_node * new_song_node = (struct song_node*)malloc(sizeof(struct song_node));
-  strcpy(new_song_node->name, track);
-  strcpy(new_song_node->artist, band);;
-  //new_song_node->next = the_next;
+/** Make a song node.
+ * @param name: the name of the song
+ * @param artist: the artist of the song
+ * @return: the created node
+ */
+struct song_node *make_song_node(char name[], char artist[]){
+  struct song_node *new_song_node = (struct song_node*)malloc(sizeof(struct song_node));
+  strcpy(new_song_node->name, name);
+  strcpy(new_song_node->artist, artist);
   return new_song_node;
-
 }
 
-struct song_node * insert_front(struct song_node * front, char name[], char artist[]){
-  //Creates a new front song_node
-    // (struct song_node*)malloc(sizeof(struct song_node));
-    //if(new_front == NULL){
-    //     printf("Error\n");
-    //    exit(0);
-  //  }
-  // new_front->something = val1;
-    // new_front->another = val2;
-    // new_front->next = front;
-  // printf("Success! \n");
-  struct song_node * new_front = make_song_node(name, artist);
-  new_front->next = front;
+/** Insert a song at the front of the list.
+ * @param front: the front of the list
+ * @param new_front: the new front of the list
+ * @return: the new list, with the added node in front
+ */
+struct song_node insert_front(struct song_node *front, struct song_node new_front) {
+  new_front.next = front;
   return new_front;
 }
 
-struct song_node * insert_order(char track[], char band[]){
-  struct song_node * new_node = make_song_node(track, band);
-  int i = new_node->artist[0];
-  struct song_node * songs = &song_array[i];
-  struct song_node * prev_node = NULL;
-  while (songs){
-    struct song_node * song_next = songs->next;
-    int tmp = strcmp(songs->artist, band);
-    if (!tmp){
-      tmp = strcmp(songs->name, track); // Case where artist is the same
-      if (!tmp){
-	printf("Song already exists!");
-	return songs;
-      }else{
-	if(tmp < 0){
-	  prev_node->next = new_node;
-	  new_node->next = song_next;
-	}else{
-	  prev_node = songs;
-	  songs = song_next;
-	}
-      }
-    }else{
-      if (tmp < 0){
-	prev_node->next = new_node;
-	new_node->next = song_next;
-      }else{
-	prev_node = songs;
-	songs = song_next;
+/** Insert a song in the proper location in a list. Assumes it has been given
+ * the correct list.
+ * @param song: the name of the song
+ * @param artist: the artist of the song
+ * @param head: the beginning of the list
+ * @return: the head, whether or not it was changed
+ */
+struct song_node insert_order(char song[], char artist[], struct song_node head){
+  struct song_node *new_node = make_song_node(song, artist);
+  struct song_node *current = &head;
+  struct song_node *prev = NULL;
+
+  int val;
+  while (1) {
+    if (! current) {
+      prev->next = new_node;
+      return head;
+    }
+
+    val = strcmp(current->artist, new_node->artist);
+
+    // between prev and current
+    if (val < 0) {
+      prev->next = new_node;
+      new_node->next = current;
+      return head;
+    }
+
+    // same artist
+    if (! val) {
+      if (strcmp(current->name, new_node->name) <= 0) {
+        prev->next = new_node;
+        new_node->next = current;
+        return head;
       }
     }
+
+    prev = current;
+    current = current->next;
   }
-  return new_node;
 }
 
-
-
-struct song_node * free_list(struct song_node * front){
+/** Free a list.
+ * @param front: the beginning of the list to free
+ */
+void free_list(struct song_node * front){
   struct song_node *temp;
-  while(front != NULL){
+  while(front) {
     temp = front->next;
     free(front);
     front = temp;
-    printf("Memory freed! \n");
   }
-  return front;
 }
