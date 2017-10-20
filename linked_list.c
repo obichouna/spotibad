@@ -148,3 +148,20 @@ struct song_node *rand_song(struct song_node *head) {
   return head;
 }
 
+/** Remove a node from a list.
+ * @param head: the beginning of the list
+ * @param node: the node to remove
+ */
+void remove_node(struct song_node *head, struct song_node *node) {
+  struct song_node *prev = NULL;
+  while (head) {
+    if (! (strcmp(head->name, node->name) && strcmp(head->artist, node->artist)) ) {
+      prev->next = head->next;
+      free(head);
+      return;
+    }
+
+    prev = head;
+    head = head->next;
+  }
+}

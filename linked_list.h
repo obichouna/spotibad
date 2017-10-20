@@ -10,6 +10,6 @@ struct song_node *locate_song(char *name, char *artist, struct song_node *head);
 struct song_node *locate_artist(char *artist, struct song_node *head);
 
 struct song_node *rand_song(struct song_node *head);
-struct song_node *remove_node(struct song_node *node);
+void remove_node(struct song_node *head, struct song_node *node);
 void free_list(struct song_node * front);
 
