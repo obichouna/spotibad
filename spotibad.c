@@ -20,7 +20,8 @@ struct song_node * song_search(char song[], char artist[]) {
 }
 
 struct song_node * artist_search (char artist[]){
-  int i = artist[0] - 65; // Getting the index of the alphabet[] array
+  int i = artist[0]; // Getting the index of the alphabet[] array
+  i = i >= 97 ? i - 97 : i - 65; // Getting the index of the alphabet[] array
   return locate_artist(artist, table[i]);
 }
 
@@ -32,7 +33,8 @@ void print_letter(char directory){
 }
 
 void print_artists_songs(char artist[]){
-  int i = artist[0] - 65; // Getting the index of the alphabet[] array
+  int i = artist[0]; // Getting the index of the alphabet[] array
+  i = i >= 97 ? i - 97 : i - 65; // Getting the index of the alphabet[] array
   struct song_node* head = locate_artist(artist, table[i]);
   while(head && (! strcmp(head->artist, artist))) {
     print_song(head);
