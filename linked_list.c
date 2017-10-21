@@ -59,7 +59,9 @@ struct song_node * insert_order(char song[], char artist[], struct song_node* he
   int val;
   while (1) {
     if (! current) {
-      prev->next = new_node;
+      if (prev) {
+        prev->next = new_node;
+      }
       return new_node;
     }
 
