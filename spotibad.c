@@ -9,6 +9,9 @@ struct song_node *table[26];
 
 void add_song_node(struct song_node *track) {
   char first_letter = track->artist[0];
+  if (first_letter >= 97){
+    first_letter -= 32;
+  }
   int i = first_letter - 65; // Getting the index of the alphabet[] array
   struct song_node* head = table[i];
   insert_order(track->name, track->artist, head);
