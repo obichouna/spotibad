@@ -8,4 +8,4 @@ void print_artists_songs(char artist[]);
 void print_library();
 void shuffle(int);
 void delete_song(struct song_node *song);
-void * clear_all();
+void clear_all();
