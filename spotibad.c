@@ -13,8 +13,7 @@ void add_song_node(struct song_node *track) {
     first_letter -= 32;
   }
   int i = first_letter - 65; // Getting the index of the alphabet[] array
-  struct song_node* head = table[i];
-  insert_order(track->name, track->artist, head);
+  table[i] = insert_order(track->name, track->artist, table[i]);
   printf("Added song: %s - %s \n", track->artist, track->name);
 }
 

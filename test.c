@@ -214,4 +214,12 @@ int main(){
   add_song_node(make_song_node("Piano Man"                                           ,"Billy Joel"));
   add_song_node(make_song_node("sweet home alabama"                                  ,"lynyrd skynyrd"));
   add_song_node(make_song_node("Do You Believe In Magic"                             ,"The Lovin' Spoonful"));
+
+  printf("\n\n\n\n\nTake a look at all these songs!\n");
+  print_library();
+
+  printf("\n\n\n\n\nGreat, let's search for some songs.\n");
+  printf("Good: %p\n", song_search("Whip It", "Devo"));
+  printf("Good: %p\n", song_search("Santa's Got A Choo Choo Train", "Blake Shelton"));
+  printf("Bad:  %p\n", song_search("not a title", "not an artist"));
 }

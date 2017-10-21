@@ -8,7 +8,7 @@
  * @param song: the song to print
  */
 void print_song(struct song_node *song) {
-    printf("%s - %s \n", song->artist, song->name);
+  printf("%s - %s \n", song->artist, song->name);
 }
 
 /** Print the contents of a given list, formatted "Artist - Title" until it
@@ -61,25 +61,36 @@ struct song_node * insert_order(char song[], char artist[], struct song_node* he
     if (! current) {
       if (prev) {
         prev->next = new_node;
+        return head;
+      } else {
+        return new_node;
       }
-      return new_node;
     }
 
     val = strcmp(current->artist, new_node->artist);
 
     // between prev and current
-    if (val < 0) {
-      prev->next = new_node;
+    if (val > 0) {
+      if (prev) {
+        prev->next = new_node;
+      } else {
+        head = new_node;
+      }
+
       new_node->next = current;
-      return new_node;
+      return head;
     }
 
     // same artist
     if (! val) {
-      if (strcmp(current->name, new_node->name) <= 0) {
-        prev->next = new_node;
-        new_node->next = current;
-        return new_node;
+      if (strcmp(current->name, new_node->name) > 0) {
+        if (prev) {
+          prev->next = new_node;
+          new_node->next = current;
+          return head;
+        } else {
+          return new_node;
+        }
       }
     }
 
