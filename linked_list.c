@@ -85,11 +85,12 @@ struct song_node * insert_order(char song[], char artist[], struct song_node* he
       if (strcmp(current->name, new_node->name) > 0) {
         if (prev) {
           prev->next = new_node;
-          new_node->next = current;
-          return head;
         } else {
-          return new_node;
+          head = new_node;
         }
+
+        new_node->next = current;
+        return head;
       }
     }
 
@@ -170,21 +171,28 @@ struct song_node *rand_song(struct song_node *head) {
 /** Remove a node from a list.
  * @param head: the beginning of the list
  * @param node: the node to remove
- * @return: 0 if song removed, 1 otherwise
+ * @return: the new head of the list
  */
-char remove_node(struct song_node *head, struct song_node *node) {
+struct song_node *remove_node(struct song_node *head, struct song_node *node) {
+  struct song_node *tmp = head;
   struct song_node *prev = NULL;
-  while (head) {
-    if (! (strcmp(head->name, node->name) && strcmp(head->artist, node->artist)) ) {
-      prev->next = head->next;
-      free(head);
-      return 0;
+  while (tmp) {
+    if (! (strcmp(tmp->name, node->name) && strcmp(tmp->artist, node->artist)) ) {
+
+      if (prev) {
+        prev->next = tmp->next;
+      } else {
+        head = tmp->next;
+      }
+
+      free(tmp);
+      return head;
     }
 
-    prev = head;
-    head = head->next;
+    prev = tmp;
+    tmp = tmp->next;
   }
 
-  return 1;
+  return head;
 }
 

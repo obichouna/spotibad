@@ -8,16 +8,14 @@ struct song_node *table[26];
 
 void add_song_node(struct song_node *track) {
   char first_letter = track->artist[0];
-  if (first_letter >= 97){
-    first_letter -= 32;
-  }
-  int i = first_letter - 65; // Getting the index of the alphabet[] array
+  int i = first_letter >= 97 ? first_letter - 97 : first_letter - 65; // Getting the index of the alphabet[] array
   table[i] = insert_order(track->name, track->artist, table[i]);
   printf("Added song: %s - %s \n", track->artist, track->name);
 }
 
 struct song_node * song_search(char song[], char artist[]) {
-  int i = artist[0] - 65; // Getting the index of the alphabet[] array
+  int i = artist[0]; // Getting the index of the alphabet[] array
+  i = i >= 97 ? i - 97 : i - 65; // Getting the index of the alphabet[] array
   return locate_song(song, artist, table[i]);
 }
 
@@ -51,7 +49,7 @@ void print_library(){
 }
 
 /* WILL NOT WORK IF THE PRNG HAS NOT BEEN SEEDED.
- */
+*/
 void shuffle(int val) {
   int i;
 
@@ -68,13 +66,8 @@ void shuffle(int val) {
 
 void delete_song(struct song_node *song){
   char first_letter = song->artist[0];
-  int i = first_letter - 65; // Getting the index of the alphabet[] array
-  struct song_node* head = table[i];
-  if (remove_node(head, song)) {
-    printf("Song not found.\n");
-  } else {
-    printf("Song removed. \n");
-  }
+  int i = first_letter >= 97 ? first_letter - 97 : first_letter - 65; // Getting the index of the alphabet[] array
+  table[i] = remove_node(table[i], song);
 }
 
 void clear_all(){
