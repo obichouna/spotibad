@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
 #include "linked_list.h"
 
 /** Print a song.
@@ -147,6 +146,7 @@ struct song_node *locate_artist(char *artist, struct song_node *head) {
 }
 
 /** Find a random song.
+ * WILL NOT WORK IF THE PRNG HAS NOT BEEN SEEDED.
  * @param head: the beginning of the list
  * @return: a random node from the list
  */
@@ -158,7 +158,6 @@ struct song_node *rand_song(struct song_node *head) {
     tmp = tmp->next;
   }
 
-  srand(time(NULL));
   i = rand() % i;
 
   while (i--) {

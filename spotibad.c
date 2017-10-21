@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
 #include "spotibad.h"
 
 
@@ -38,7 +37,7 @@ void print_artists_songs(char artist[]){
   int i = artist[0] - 65; // Getting the index of the alphabet[] array
   struct song_node* head = locate_artist(artist, table[i]);
   while(head && (! strcmp(head->artist, artist))) {
-    printf("%s - %s", head->artist, head->name);
+    print_song(head);
     head = head->next;
   }
 }
@@ -51,14 +50,18 @@ void print_library(){
   }
 }
 
+/* WILL NOT WORK IF THE PRNG HAS NOT BEEN SEEDED.
+ */
 void shuffle(int val) {
+  int i;
+
   while (val--) {
-    srand(time(NULL));
-    int i = rand() % 26;
+    i = rand() % 26;
+
     if (table[i]) {
-      val++;
-    } else {
       print_song(rand_song(table[i]));
+    } else {
+      val++;
     }
   }
 }

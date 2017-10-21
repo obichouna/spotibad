@@ -1,7 +1,9 @@
 #include <stdio.h>
+#include <time.h>
 #include "spotibad.h"
 
 int main(){
+  srand(time(NULL)); // prng MUST be seeded here, and nowhere else
 
   printf("  ___ ___  ___ _____ ___ ___   _   ___  \n");
   printf(" / __| _ \\/ _ \\_   _|_ _| _ ) /_\\ |   \\ \n");
@@ -222,4 +224,25 @@ int main(){
   printf("Good: %p\n", song_search("Whip It", "Devo"));
   printf("Good: %p\n", song_search("Santa's Got A Choo Choo Train", "Blake Shelton"));
   printf("Bad:  %p\n", song_search("not a title", "not an artist"));
+
+  printf("\n\n\n\n\nHow about some artists?\n");
+  printf("Good: %p\n", artist_search("Jeff Buckley"));
+  printf("Good: %p\n", artist_search("Pink Floyd"));
+  printf("Bad:  %p\n", artist_search("not an artist"));
+
+  printf("\n\n\n\n\nGive me all the artists beginning with 'P'!\n");
+  print_letter('P');
+
+  printf("\n\n\n\n\nBut wait, does it work for 'p'?\n");
+  print_letter('p');
+
+  printf("\n\n\n\n\nAll the songs by a specific artist?\n");
+  print_artists_songs("Rick Astley");
+  print_artists_songs("Selena Gomez");
+  print_artists_songs("not an artist");
+
+  printf("\n\n\n\n\nPlay me 10 random songs.\n");
+  shuffle(10);
+
+
 }
