@@ -14,7 +14,7 @@ spotibad: $(OBJ)
 	@$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
-	rm -f linked_list $(OBJ)
+	rm -f spotibad $(OBJ)
 
 run: spotibad
 	./spotibad
