@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "spotibad.h"
 
 
@@ -48,8 +49,16 @@ void print_library(){
   }
 }
 
-void shuffle(int val){
-
+void shuffle(int val) {
+  while (val--) {
+    srand(time(NULL));
+    int i = rand() % 26;
+    if (table[i]) {
+      val++;
+    } else {
+      print_song(rand_song(table[i]));
+    }
+  }
 }
 
 void delete_song(struct song_node *song){

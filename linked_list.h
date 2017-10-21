@@ -4,6 +4,7 @@ struct song_node *make_song_node(char name[], char artist[]);
 struct song_node insert_front(struct song_node *front, struct song_node new_front);
 struct song_node* insert_order(char song[], char artist[], struct song_node* head);
 
+void print_song(struct song_node *song);
 void print_list(struct song_node *list);
 
 struct song_node *locate_song(char *name, char *artist, struct song_node *head);

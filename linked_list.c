@@ -4,13 +4,20 @@
 #include <time.h>
 #include "linked_list.h"
 
+/** Print a song.
+ * @param song: the song to print
+ */
+void print_song(struct song_node *song) {
+    printf("%s - %s \n", song->artist, song->name);
+}
+
 /** Print the contents of a given list, formatted "Artist - Title" until it
  * reaches the end.
  * @param list: the list to print from
  */
 void print_list(struct song_node *list) {
   while (list != NULL) {
-    printf("%s - %s \n", list->artist, list->name);
+    print_song(list);
     list = list->next;
   }
 }
